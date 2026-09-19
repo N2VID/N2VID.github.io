@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,6 +69,45 @@
       display: flex;
       flex-direction: column;
       transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .shape {
+      position: absolute;
+      bottom: -12%;
+      font-size: var(--s);
+      color: var(--c);
+      filter: blur(0.5px);
+      user-select: none;
+      animation: floatUp var(--d, 20s) linear infinite;
+      animation-delay: var(--dl, 0s);
+      will-change: transform;
+    }
+
+    .shape i {
+      font-style: normal;
+      display: inline-block;
+      font-family: inherit;
+      animation: sway var(--sw, 9s) ease-in-out infinite alternate;
+      animation-delay: var(--dl, 0s);
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-118vh) rotate(220deg); }
+    }
+
+    @keyframes sway {
+      from { transform: translateX(-18px); }
+      to   { transform: translateX(18px); }
     }
 
     .toggle-wrap {
@@ -104,11 +143,19 @@
       margin: 0 auto;
       padding: 72px 20px 48px;
       width: 100%;
+      position: relative;
+      z-index: 1;
     }
 
     .profile {
       text-align: center;
       margin-bottom: 52px;
+    }
+
+    .avatar-wrap {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 20px;
     }
 
     .avatar {
@@ -118,7 +165,35 @@
       object-fit: cover;
       border: 3px solid var(--card);
       box-shadow: var(--shadow);
-      margin-bottom: 20px;
+      display: block;
+    }
+
+    .lang-btn {
+      position: absolute;
+      bottom: 2px;
+      inset-inline-end: 2px;
+      min-width: 40px;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent);
+      transform: scale(1.08);
     }
 
     h1 {
@@ -185,7 +260,7 @@
     }
 
     .project {
-      background: var(--card);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 22px;
@@ -260,6 +335,11 @@
       fill: currentColor;
     }
 
+    .b-icon {
+      font-size: 15px;
+      line-height: 1;
+    }
+
     .btn-primary {
       background: var(--accent);
       border-color: var(--accent);
@@ -280,6 +360,8 @@
       padding: 32px 20px;
       color: var(--muted);
       font-size: 13px;
+      position: relative;
+      z-index: 1;
     }
 
     footer a {
@@ -296,25 +378,48 @@
   </style>
 </head>
 <body>
+
+  <div class="bg" aria-hidden="true">
+    <span class="shape" style="--s:3.2rem; left:6%;  --c:rgba(252,186,3,0.14);  --d:22s; --dl:0s;"><i>A</i></span>
+    <span class="shape" style="--s:2.4rem; left:16%; --c:rgba(124,179,66,0.18); --d:19s; --dl:-4s;"><i>B</i></span>
+    <span class="shape" style="--s:3rem;   left:28%; --c:rgba(0,112,209,0.15); --d:25s; --dl:-8s;"><i>X</i></span>
+    <span class="shape" style="--s:2.2rem; left:40%; --c:rgba(252,186,3,0.16); --d:18s; --dl:-2s;"><i>Y</i></span>
+    <span class="shape" style="--s:3.4rem; left:52%; --c:rgba(124,179,66,0.13); --d:24s; --dl:-11s;"><i>▲</i></span>
+    <span class="shape" style="--s:2.6rem; left:64%; --c:rgba(0,112,209,0.17); --d:20s; --dl:-6s;"><i>●</i></span>
+    <span class="shape" style="--s:3rem;   left:76%; --c:rgba(252,186,3,0.15); --d:23s; --dl:-13s;"><i>✕</i></span>
+    <span class="shape" style="--s:2.4rem; left:88%; --c:rgba(124,179,66,0.16); --d:17s; --dl:-3s;"><i>■</i></span>
+    <span class="shape" style="--s:2.8rem; left:10%; --c:rgba(0,112,209,0.13); --d:26s; --dl:-15s;"><i>A</i></span>
+    <span class="shape" style="--s:2.2rem; left:34%; --c:rgba(124,179,66,0.18); --d:21s; --dl:-9s;"><i>●</i></span>
+    <span class="shape" style="--s:3rem;   left:58%; --c:rgba(252,186,3,0.14); --d:28s; --dl:-18s;"><i>B</i></span>
+    <span class="shape" style="--s:2.5rem; left:82%; --c:rgba(0,112,209,0.16); --d:19s; --dl:-7s;"><i>▲</i></span>
+    <span class="shape" style="--s:3.4rem; left:22%; --c:rgba(252,186,3,0.12); --d:27s; --dl:-20s;"><i>X</i></span>
+    <span class="shape" style="--s:2.3rem; left:70%; --c:rgba(124,179,66,0.14); --d:22s; --dl:-12s;"><i>✕</i></span>
+    <span class="shape" style="--s:2.9rem; left:45%; --c:rgba(0,112,209,0.12); --d:24s; --dl:-16s;"><i>■</i></span>
+    <span class="shape" style="--s:2.1rem; left:92%; --c:rgba(124,179,66,0.15); --d:20s; --dl:-5s;"><i>Y</i></span>
+  </div>
+
   <div class="toggle-wrap">
-    <button id="theme-toggle" aria-label="تغییر تم" title="تغییر تم"></button>
+    <button id="theme-toggle" aria-label="Toggle theme" title="Toggle theme"></button>
   </div>
 
   <main>
     <section class="profile">
-      <img class="avatar" src="https://avatars.githubusercontent.com/u/199596053?v=4" alt="N2VID">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/199596053?v=4" alt="N2VID">
+        <button id="lang-btn" class="lang-btn" title="Language">EN</button>
+      </div>
       <h1>N2VID</h1>
       <p class="handle">@N2VID</p>
       <a class="social" href="https://github.com/N2VID" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.98 10.98 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.77 1.04.77 2.1v3.11c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
         </svg>
-        ادامه در گیت‌هاب
+        <span data-i18n="social">My GitHub</span>
       </a>
     </section>
 
     <section>
-      <h2 class="section-title">پروژه‌ها</h2>
+      <h2 class="section-title" data-i18n="projects">Projects</h2>
       <div class="grid">
 
         <article class="project">
@@ -322,17 +427,15 @@
             <span class="project-name">Microphone_Booster</span>
             <span class="lang">Python</span>
           </div>
-          <p class="project-desc">
-            تقویت‌کننده بدون تأخیر میکروفون برای ویندوز — تقویت صدا، نویزگیر، تشخیص صدا و پخش مستقیم با کمترین تأخیر، همراه با رابط دوزبانه فارسی و انگلیسی.
-          </p>
+          <p class="project-desc" data-i18n="desc">Real-time microphone booster for Windows — boost, noise gate, voice detection, and speaker playback with low latency. Bilingual UI (Persian/English).</p>
           <div class="actions">
             <a class="btn btn-primary" href="https://github.com/N2VID/Microphone_Booster" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24"><path d="M12 6.5a1 1 0 0 1 1 1v5.5h5.5a1 1 0 1 1 0 2H13v5.5a1 1 0 1 1-2 0V15H5.5a1 1 0 1 1 0-2H11V7.5a1 1 0 0 1 1-1Z"/></svg>
-              صفحه اصلی
+              <span class="b-icon">🏠</span>
+              <span data-i18n="home">Home</span>
             </a>
             <a class="btn btn-outline" href="https://github.com/N2VID/Microphone_Booster/releases" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24"><path d="M14 4a3 3 0 0 0-2.83 2H4a1 1 0 0 0 0 2h1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h1a1 1 0 1 0 0-2h-7.17A3 3 0 0 0 14 4Zm0 2a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-5 4a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Z"/></svg>
-              ریلیزها
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4a3 3 0 0 0-2.83 2H4a1 1 0 0 0 0 2h1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h1a1 1 0 1 0 0-2h-7.17A3 3 0 0 0 14 4Zm0 2a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-5 4a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Z"/></svg>
+              <span data-i18n="releases">Releases</span>
             </a>
           </div>
         </article>
@@ -342,33 +445,73 @@
   </main>
 
   <footer>
-    ساخته‌شده با <a href="https://github.com/N2VID" target="_blank" rel="noopener">N2VID</a>
+    <span data-i18n="footer">Built with</span> <a href="https://github.com/N2VID" target="_blank" rel="noopener">N2VID</a>
   </footer>
 
   <script>
     const btn = document.getElementById("theme-toggle");
     const root = document.documentElement;
 
-    const icons = {
-      light: "🌙",
-      dark: "☀️"
-    };
+    const themeIcons = { light: "🌙", dark: "☀️" };
 
-    const saved = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem("theme");
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const theme = saved || (systemDark ? "dark" : "light");
+    const theme = savedTheme || (systemDark ? "dark" : "light");
 
-    function apply(t) {
+    function applyTheme(t) {
       root.setAttribute("data-theme", t);
-      btn.textContent = icons[t];
+      btn.textContent = themeIcons[t];
     }
 
-    apply(theme);
+    applyTheme(theme);
 
     btn.addEventListener("click", () => {
       const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       localStorage.setItem("theme", next);
-      apply(next);
+      applyTheme(next);
+    });
+
+    const langBtn = document.getElementById("lang-btn");
+
+    const i18n = {
+      en: {
+        social: "My GitHub",
+        projects: "Projects",
+        home: "Home",
+        releases: "Releases",
+        desc: "Real-time microphone booster for Windows — boost, noise gate, voice detection, and speaker playback with low latency. Bilingual UI (Persian/English).",
+        footer: "Built with"
+      },
+      fa: {
+        social: "ادامه در گیت‌هاب",
+        projects: "پروژه‌ها",
+        home: "صفحه اصلی",
+        releases: "ریلیزها",
+        desc: "تقویت‌کننده بدون تأخیر میکروفون برای ویندوز — تقویت صدا، نویزگیر، تشخیص صدا و پخش مستقیم با کمترین تأخیر، همراه با رابط دوزبانه فارسی و انگلیسی.",
+        footer: "ساخته‌شده با"
+      }
+    };
+
+    let lang = localStorage.getItem("lang") || "en";
+
+    function setLang(l) {
+      const t = i18n[l];
+      root.lang = l;
+      root.dir = l === "fa" ? "rtl" : "ltr";
+      Object.keys(t).forEach((key) => {
+        document.querySelectorAll(`[data-i18n="${key}"]`).forEach((el) => {
+          el.textContent = t[key];
+        });
+      });
+      langBtn.textContent = l === "fa" ? "FA" : "EN";
+      localStorage.setItem("lang", l);
+    }
+
+    setLang(lang);
+
+    langBtn.addEventListener("click", () => {
+      setLang(lang === "en" ? "fa" : "en");
+      lang = lang === "en" ? "fa" : "en";
     });
   </script>
 </body>
