@@ -18,6 +18,7 @@
       --accent: #3b82f6;
       --accent-hover: #2563eb;
       --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --shade: 0.32;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -30,6 +31,7 @@
         --accent: #60a5fa;
         --accent-hover: #93c5fd;
         --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        --shade: 0.62;
       }
     }
 
@@ -42,6 +44,7 @@
       --accent: #3b82f6;
       --accent-hover: #2563eb;
       --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --shade: 0.32;
     }
 
     [data-theme="dark"] {
@@ -53,6 +56,7 @@
       --accent: #60a5fa;
       --accent-hover: #93c5fd;
       --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shade: 0.62;
     }
 
     * {
@@ -84,7 +88,7 @@
       position: absolute;
       bottom: -12%;
       font-size: var(--s);
-      color: var(--c);
+      color: rgb(var(--c, 59, 130, 246) / var(--shade, 0.32));
       filter: blur(0.5px);
       user-select: none;
       animation: floatUp var(--d, 20s) linear infinite;
@@ -101,8 +105,8 @@
     }
 
     @keyframes floatUp {
-      0%   { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(-118vh) rotate(220deg); }
+      0%   { transform: translateY(0) rotate(-12deg); }
+      100% { transform: translateY(-118vh) rotate(18deg); }
     }
 
     @keyframes sway {
@@ -148,6 +152,18 @@
     #theme-toggle {
       font-size: 18px;
       letter-spacing: 0;
+    }
+
+    #lang-btn {
+      width: 46px;
+      flex: 0 0 46px;
+      padding: 0;
+      letter-spacing: 0.08em;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    #lang-btn:hover {
+      transform: none;
     }
 
     main {
@@ -389,22 +405,30 @@
 <body>
 
   <div class="bg" aria-hidden="true">
-    <span class="shape" style="--s:3.2rem; left:6%;  --c:rgba(252,186,3,0.14);  --d:22s; --dl:0s;"><i>A</i></span>
-    <span class="shape" style="--s:2.4rem; left:16%; --c:rgba(124,179,66,0.18); --d:19s; --dl:-4s;"><i>B</i></span>
-    <span class="shape" style="--s:3rem;   left:28%; --c:rgba(0,112,209,0.15); --d:25s; --dl:-8s;"><i>X</i></span>
-    <span class="shape" style="--s:2.2rem; left:40%; --c:rgba(252,186,3,0.16); --d:18s; --dl:-2s;"><i>Y</i></span>
-    <span class="shape" style="--s:3.4rem; left:52%; --c:rgba(124,179,66,0.13); --d:24s; --dl:-11s;"><i>▲</i></span>
-    <span class="shape" style="--s:2.6rem; left:64%; --c:rgba(0,112,209,0.17); --d:20s; --dl:-6s;"><i>●</i></span>
-    <span class="shape" style="--s:3rem;   left:76%; --c:rgba(252,186,3,0.15); --d:23s; --dl:-13s;"><i>✕</i></span>
-    <span class="shape" style="--s:2.4rem; left:88%; --c:rgba(124,179,66,0.16); --d:17s; --dl:-3s;"><i>■</i></span>
-    <span class="shape" style="--s:2.8rem; left:10%; --c:rgba(0,112,209,0.13); --d:26s; --dl:-15s;"><i>A</i></span>
-    <span class="shape" style="--s:2.2rem; left:34%; --c:rgba(124,179,66,0.18); --d:21s; --dl:-9s;"><i>●</i></span>
-    <span class="shape" style="--s:3rem;   left:58%; --c:rgba(252,186,3,0.14); --d:28s; --dl:-18s;"><i>B</i></span>
-    <span class="shape" style="--s:2.5rem; left:82%; --c:rgba(0,112,209,0.16); --d:19s; --dl:-7s;"><i>▲</i></span>
-    <span class="shape" style="--s:3.4rem; left:22%; --c:rgba(252,186,3,0.12); --d:27s; --dl:-20s;"><i>X</i></span>
-    <span class="shape" style="--s:2.3rem; left:70%; --c:rgba(124,179,66,0.14); --d:22s; --dl:-12s;"><i>✕</i></span>
-    <span class="shape" style="--s:2.9rem; left:45%; --c:rgba(0,112,209,0.12); --d:24s; --dl:-16s;"><i>■</i></span>
-    <span class="shape" style="--s:2.1rem; left:92%; --c:rgba(124,179,66,0.15); --d:20s; --dl:-5s;"><i>Y</i></span>
+    <!-- Xbox: A (green) -->
+    <span class="shape" style="--s:3.2rem; left:6%;  --c:16,124,16;  --d:22s; --dl:0s;"><i>A</i></span>
+    <span class="shape" style="--s:2.4rem; left:16%; --c:16,124,16;  --d:19s; --dl:-4s;"><i>A</i></span>
+    <!-- Xbox: B (red) -->
+    <span class="shape" style="--s:2.4rem; left:58%; --c:225,6,0;   --d:17s; --dl:-3s;"><i>B</i></span>
+    <span class="shape" style="--s:3rem;   left:3%;  --c:225,6,0;   --d:28s; --dl:-18s;"><i>B</i></span>
+    <!-- Xbox: X (blue) -->
+    <span class="shape" style="--s:3rem;   left:28%; --c:0,164,239; --d:25s; --dl:-8s;"><i>X</i></span>
+    <span class="shape" style="--s:3.4rem; left:22%; --c:0,164,239; --d:27s; --dl:-20s;"><i>X</i></span>
+    <!-- Xbox: Y (yellow) -->
+    <span class="shape" style="--s:2.2rem; left:40%; --c:255,185,0; --d:18s; --dl:-2s;"><i>Y</i></span>
+    <span class="shape" style="--s:2.1rem; left:92%; --c:255,185,0; --d:20s; --dl:-5s;"><i>Y</i></span>
+    <!-- PlayStation: Triangle (green) -->
+    <span class="shape" style="--s:3.4rem; left:52%; --c:140,198,63; --d:24s; --dl:-11s;"><i>▲</i></span>
+    <span class="shape" style="--s:2.5rem; left:82%; --c:140,198,63; --d:19s; --dl:-7s;"><i>▲</i></span>
+    <!-- PlayStation: Circle (pink/red) -->
+    <span class="shape" style="--s:2.6rem; left:64%; --c:240,67,147; --d:20s; --dl:-6s;"><i>●</i></span>
+    <span class="shape" style="--s:2.2rem; left:34%; --c:240,67,147; --d:21s; --dl:-9s;"><i>●</i></span>
+    <!-- PlayStation: Cross (blue) -->
+    <span class="shape" style="--s:3rem;   left:76%; --c:46,107,214; --d:23s; --dl:-13s;"><i>✕</i></span>
+    <span class="shape" style="--s:2.3rem; left:70%; --c:46,107,214; --d:22s; --dl:-12s;"><i>✕</i></span>
+    <!-- PlayStation: Square (purple) -->
+    <span class="shape" style="--s:2.4rem; left:88%; --c:169,117,217; --d:17s; --dl:-3s;"><i>■</i></span>
+    <span class="shape" style="--s:2.9rem; left:45%; --c:169,117,217; --d:24s; --dl:-16s;"><i>■</i></span>
   </div>
 
   <div class="toggle-wrap">
