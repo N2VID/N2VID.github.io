@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N2VID</title>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/199596053?v=4" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1115;
+        --card: #171a21;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --border: #232735;
+        --accent: #60a5fa;
+        --accent-hover: #93c5fd;
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    [data-theme="light"] {
+      --bg: #fafafa;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f1115;
+      --card: #171a21;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #232735;
+      --accent: #60a5fa;
+      --accent-hover: #93c5fd;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .toggle-wrap {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10;
+    }
+
+    #theme-toggle {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, background 0.3s, border-color 0.3s;
+    }
+
+    #theme-toggle:hover {
+      transform: scale(1.08);
+    }
+
+    main {
+      flex: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 72px 20px 48px;
+      width: 100%;
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .avatar {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--card);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .handle {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 6px 0 20px;
+      direction: ltr;
+    }
+
+    .social {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.3s;
+    }
+
+    .social svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--accent);
+    }
+
+    .social:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .section-title {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .project {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.3s;
+    }
+
+    .project:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .project-name {
+      font-size: 17px;
+      font-weight: 700;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .lang {
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-outline:hover {
+      background: var(--card);
+      border-color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 520px) {
+      .avatar {
+        width: 96px;
+        height: 96px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle-wrap">
+    <button id="theme-toggle" aria-label="تغییر تم" title="تغییر تم"></button>
+  </div>
+
+  <main>
+    <section class="profile">
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/199596053?v=4" alt="N2VID">
+      <h1>N2VID</h1>
+      <p class="handle">@N2VID</p>
+      <a class="social" href="https://github.com/N2VID" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.98 10.98 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.66.41.35.77 1.04.77 2.1v3.11c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+        </svg>
+        ادامه در گیت‌هاب
+      </a>
+    </section>
+
+    <section>
+      <h2 class="section-title">پروژه‌ها</h2>
+      <div class="grid">
+
+        <article class="project">
+          <div class="project-top">
+            <span class="project-name">Microphone_Booster</span>
+            <span class="lang">Python</span>
+          </div>
+          <p class="project-desc">
+            تقویت‌کننده بدون تأخیر میکروفون برای ویندوز — تقویت صدا، نویزگیر، تشخیص صدا و پخش مستقیم با کمترین تأخیر، همراه با رابط دوزبانه فارسی و انگلیسی.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/N2VID/Microphone_Booster" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 6.5a1 1 0 0 1 1 1v5.5h5.5a1 1 0 1 1 0 2H13v5.5a1 1 0 1 1-2 0V15H5.5a1 1 0 1 1 0-2H11V7.5a1 1 0 0 1 1-1Z"/></svg>
+              صفحه اصلی
+            </a>
+            <a class="btn btn-outline" href="https://github.com/N2VID/Microphone_Booster/releases" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M14 4a3 3 0 0 0-2.83 2H4a1 1 0 0 0 0 2h1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h1a1 1 0 1 0 0-2h-7.17A3 3 0 0 0 14 4Zm0 2a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-5 4a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Z"/></svg>
+              ریلیزها
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    ساخته‌شده با <a href="https://github.com/N2VID" target="_blank" rel="noopener">N2VID</a>
+  </footer>
+
+  <script>
+    const btn = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+
+    const icons = {
+      light: "🌙",
+      dark: "☀️"
+    };
+
+    const saved = localStorage.getItem("theme");
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = saved || (systemDark ? "dark" : "light");
+
+    function apply(t) {
+      root.setAttribute("data-theme", t);
+      btn.textContent = icons[t];
+    }
+
+    apply(theme);
+
+    btn.addEventListener("click", () => {
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", next);
+      apply(next);
+    });
+  </script>
+</body>
+</html>
