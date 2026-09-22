@@ -499,7 +499,7 @@
               <span data-i18n="home">Home</span>
             </a>
             <a class="btn btn-outline" href="https://github.com/N2VID/Microphone_Booster/releases" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4a3 3 0 0 0-2.83 2H4a1 1 0 0 0 0 2h1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h1a1 1 0 1 0 0-2h-7.17A3 3 0 0 0 14 4Zm0 2a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm-5 4a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Zm6 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1Z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
               <span data-i18n="releases">Releases</span>
             </a>
           </div>
@@ -557,7 +557,7 @@
       }
     };
 
-    let lang = localStorage.getItem("lang") || "en";
+    let lang = "en";
 
     function setLang(l) {
       const t = i18n[l];
@@ -569,7 +569,6 @@
         });
       });
       langBtn.textContent = l === "fa" ? "Change to English" : "تغییر به فارسی";
-      localStorage.setItem("lang", l);
     }
 
     setLang(lang);
