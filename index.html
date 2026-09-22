@@ -122,6 +122,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      direction: ltr;
     }
 
     .icon-btn {
@@ -155,11 +156,11 @@
     }
 
     #lang-btn {
-      width: 46px;
-      flex: 0 0 46px;
-      padding: 0;
-      letter-spacing: 0.08em;
+      padding: 0 14px;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
       transition: background 0.3s, border-color 0.3s;
+      color: var(--accent);
     }
 
     #lang-btn:hover {
@@ -455,8 +456,8 @@
   </div>
 
   <div class="toggle-wrap">
+    <button id="lang-btn" class="icon-btn" title="Language">تغییر به فارسی</button>
     <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme"></button>
-    <button id="lang-btn" class="icon-btn" title="Language">EN</button>
   </div>
 
   <div class="corner-bl">
@@ -567,7 +568,7 @@
           el.textContent = t[key];
         });
       });
-      langBtn.textContent = l.toUpperCase();
+      langBtn.textContent = l === "fa" ? "Change to English" : "تغییر به فارسی";
       localStorage.setItem("lang", l);
     }
 
