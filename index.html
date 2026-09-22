@@ -333,7 +333,6 @@
     .project-name {
       font-size: 17px;
       font-weight: 700;
-      direction: ltr;
       text-align: right;
     }
 
@@ -489,7 +488,7 @@
 
         <article class="project">
           <div class="project-top">
-            <span class="project-name">Microphone_Booster</span>
+            <span class="project-name" data-i18n="projName">Microphone Booster</span>
             <span class="lang">Python</span>
           </div>
           <p class="project-desc" data-i18n="desc">Real-time microphone booster for Windows — boost, noise gate, voice detection, and speaker playback with low latency. Bilingual UI (Persian/English).</p>
@@ -540,6 +539,7 @@
 
     const i18n = {
       en: {
+        projName: "Microphone Booster",
         social: "My GitHub",
         projects: "Projects",
         home: "Home",
@@ -548,6 +548,7 @@
         footer: "Built with"
       },
       fa: {
+        projName: "تقویت‌کننده میکروفون",
         social: "ادامه در گیت‌هاب",
         projects: "پروژه‌ها",
         home: "صفحه اصلی",
